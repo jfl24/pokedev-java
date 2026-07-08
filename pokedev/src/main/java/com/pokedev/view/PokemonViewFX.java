@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class FilmViewFX {
+public class PokemonViewFX {
     // Composants exposes au Controller
     public final ListView<Pokemon> listePokemon;
     public final TextArea details;
@@ -25,7 +25,7 @@ public class FilmViewFX {
 
     private final BorderPane racine;
 
-    public FilmViewFx() {
+    public PokemonViewFX() {
         // Liste des Pokemon (gauche)
         listePokemon = new ListView<>();
         listePokemon.setPrefWidth(280);
