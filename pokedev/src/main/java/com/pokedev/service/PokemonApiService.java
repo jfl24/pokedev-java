@@ -3,6 +3,7 @@ package com.pokedev.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokedev.modele.Pokemon;
+import com.pokedev.modele.TypePokemon;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -39,9 +40,13 @@ public class PokemonApiService {
                 .get("front_default")
                 .asText();
 
-        p.type1 = pokemonJson.get("types").get(0).get("type").get("name").asText();
+
+        String type1Str =  pokemonJson.get("types").get(0).get("type").get("name").asText();
+        p.type1 = TypePokemon.fromString(type1Str);
+
         if (pokemonJson.get("types").size() > 1) {
-            p.type2 = pokemonJson.get("types").get(1).get("type").get("name").asText();
+            String type2Str = pokemonJson.get("types").get(1).get("type").get("name").asText();
+            p.type2 = TypePokemon.fromString(type2Str);
         } else {
             p.type2 = null;
         }
