@@ -46,6 +46,8 @@ public class PokemonApiService {
             p.type2 = null;
         }
 
+
+        // A SOLIDIFIER PLUS TARD. PRSENTEMENT SI L'ORDRE CHANGE TOUT CASSE
         p.hp = pokemonJson.get("stats").get(0).get("base_stat").asInt();
         p.attaque = pokemonJson.get("stats").get(1).get("base_stat").asInt();
         p.defense = pokemonJson.get("stats").get(2).get("base_stat").asInt();
