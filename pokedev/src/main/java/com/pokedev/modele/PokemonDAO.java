@@ -10,12 +10,12 @@ public class PokemonDAO {
     public void sauvegarder(Pokemon pokemon) throws SQLException {
         String sql = """
                 INSERT INTO pokemons (id, nom, image_url, type1, type2, hp, attaque, defense, attaque_speciale, defense_speciale, vitesse)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?::type_pokemon, ?::type_pokemon, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT (id) DO UPDATE SET
                     nom = EXCLUDED.nom,
                     image_url = EXCLUDED.image_url,
-                    type1 = EXCLUDED.type1,
-                    type2 = EXCLUDED.type2,
+                    type1 = EXCLUDED.type1::type_pokemon,
+                    type2 = EXCLUDED.type2::type_pokemon,
                     hp = EXCLUDED.hp,
                     attaque = EXCLUDED.attaque,
                     defense = EXCLUDED.defense,
@@ -29,8 +29,12 @@ public class PokemonDAO {
             ps.setInt(1, pokemon.id);
             ps.setString(2, pokemon.nom);
             ps.setString(3, pokemon.imageUrl);
-            ps.setString(4, pokemon.type1);
-            ps.setString(5, pokemon.type2);
+            ps.setString(4, pokemon.type1.name());
+            if (pokemon.type2 != null) {
+                ps.setString(5, pokemon.type2.name());
+            } else {
+                ps.setNull(5, java.sql.Types.VARCHAR);  // On gère les cas où le type secondaire est nulle
+            }
             ps.setInt(6, pokemon.hp);
             ps.setInt(7, pokemon.attaque);
             ps.setInt(8, pokemon.defense);
@@ -52,8 +56,16 @@ public class PokemonDAO {
                 pokemon.id = rs.getInt("id");
                 pokemon.nom = rs.getString("nom");
                 pokemon.imageUrl = rs.getString("image_url");
-                pokemon.type1 = rs.getString("type1");
-                pokemon.type2 = rs.getString("type2");
+                String t1 = rs.getString("type1");
+                pokemon.type1 = TypePokemon.valueOf(t1);
+
+                String t2 = rs.getString("type2");
+                if (t2 != null) {
+                    pokemon.type2 = TypePokemon.valueOf(t2);
+                } else {
+                    pokemon.type2 = null;
+                }
+
                 pokemon.hp = rs.getInt("hp");
                 pokemon.attaque = rs.getInt("attaque");
                 pokemon.defense = rs.getInt("defense");
