@@ -2,6 +2,7 @@
     -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     -fx-background-color: #f7f8fb;
 }
+
 .carte-pokemon {
         -fx-background-color: white;
         -fx-border-color: #d3d8e0;
@@ -14,9 +15,9 @@
     -fx-control-inner-background: transparent;
     -fx-text-fill: #1e222e;
 }
+
 .carte-pokemon .text-area .content {
     -fx-background-color: transparent;
-
 }
 
 .carte-pokemon .text-area .text {

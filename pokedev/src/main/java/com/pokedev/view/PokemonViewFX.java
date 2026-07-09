@@ -24,7 +24,7 @@ public class PokemonViewFX {
     public final ImageView imagePokemon;
     public final Label messageErreur;
 
-    private final BorderPane racine;
+    public final BorderPane racine;
 
     public PokemonViewFX() {
         // Liste des Pokemon (gauche)

@@ -33,9 +33,9 @@ public class PokemonController {
             if (nouveau != null) {
                 afficherDetails(nouveau);
                 // Un écouteur d'événements pour changer la couleur de la zone à droite selon le type du Pokémon cliqué
-                view.details.getStyleClass().setAll("carte-pokemon", nouveau.type1.name().toLowerCase());
+                view.racine.getStyleClass().setAll("carte-pokemon", nouveau.type1.name().toLowerCase());
             } else {
-                view.details.getStyleClass().setAll("carte-pokemon");
+                view.racine.getStyleClass().setAll("carte-pokemon");
             }
         });
 

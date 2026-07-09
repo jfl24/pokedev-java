@@ -1,7 +1,6 @@
 package com.pokedev;
 
 import com.pokedev.controller.PokemonController;
-import com.pokedev.modele.Pokemon;
 import com.pokedev.view.PokemonViewFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +16,7 @@ public class MainFx extends Application {
         ctrl.demarrer();
 
         Scene scene = new Scene(view.getRoot(), 900, 550);
-        scene.getStylesheets().add(Thread.currentThread().getContextClassLoader().getResource("style.css").toExternalForm());
+        scene.getStylesheets().add(Thread.currentThread().getContextClassLoader().getResource("styles/style.css").toExternalForm());
         stage.setTitle("Pokedex -- Mes Pokemon");
         stage.setScene(scene);
         stage.show();
