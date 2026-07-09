@@ -11,6 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import java.util.Optional;
+import com.pokedev.service.PokemonSonService;
 
 import java.sql.SQLException;
 
@@ -18,6 +19,7 @@ public class PokemonController {
 
     private final PokemonApiService service = new PokemonApiService();
     private final PokemonDAO dao = new PokemonDAO();
+    private final PokemonSonService sonService = new PokemonSonService();
     private final PokemonViewFX view;
 
     public PokemonController(PokemonViewFX view) {
@@ -27,6 +29,8 @@ public class PokemonController {
         view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> afficherDetails(nouveau));
 
         view.btnSupprimer.setOnAction(e -> supprimerSelection());
+
+        view.btnMute.setOnAction(e -> jouerCriSelection());
 
         view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> {
             view.btnSupprimer.setDisable(nouveau == null);
@@ -110,6 +114,21 @@ public class PokemonController {
                 view.messageErreur.setText("Erreur : " + ex.getMessage());
             }
         }
+    }
+
+    private void jouerCriSelection() {
+        Pokemon selection = view.listePokemon.getSelectionModel().getSelectedItem();
+        if (selection == null) {
+            view.messageErreur.setText("Selectionnez un Pokemon pour jouer son cri.");
+            return;
+        }
+        try {
+            sonService.jouerCri(selection);
+            view.messageErreur.setText("");
+        } catch (Exception e) {
+            view.messageErreur.setText("Erreur son : " + e.getMessage());
+        }
+        view.btnMute.setSelected(false);
     }
 
     public void demarrer() { rafraichirListe(); }
