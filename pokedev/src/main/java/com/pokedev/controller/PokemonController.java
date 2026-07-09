@@ -30,7 +30,13 @@ public class PokemonController {
 
         view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> {
             view.btnSupprimer.setDisable(nouveau == null);
-            afficherDetails(nouveau);
+            if (nouveau != null) {
+                afficherDetails(nouveau);
+                // Un écouteur d'événements pour changer la couleur de la zone à droite selon le type du Pokémon cliqué
+                view.details.getStyleClass().setAll("carte-pokemon", nouveau.type1.name().toLowerCase());
+            } else {
+                view.details.getStyleClass().setAll("carte-pokemon");
+            }
         });
 
         view.btnTheme.setOnAction(e -> {
@@ -70,6 +76,7 @@ public class PokemonController {
             Pokemon p = service.recuperer(recherche);
             dao.sauvegarder(p);
             rafraichirListe();
+            view.messageErreur.setText("");  // Pour faire disparaître le message d'erreur quand la recherche fonctionne
         } catch (Exception e) {
             view.messageErreur.setText("Pokemon introuvable ou API en erreur : "+ e.getMessage());
         }
@@ -82,7 +89,6 @@ public class PokemonController {
             view.messageErreur.setText("Erreur dans la BDD : "+ e.getMessage());
         }
     }
-
 
     private void supprimerSelection() {
         Pokemon selection = view.listePokemon.getSelectionModel().getSelectedItem();
