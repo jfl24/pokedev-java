@@ -11,13 +11,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+
 public class PokemonViewFX {
     // Composants exposes au Controller
-    public final ListView<Pokemon> listePokemon;
+    public ListView<Pokemon> listePokemon;
     public final TextArea details;
     public final TextField champNomId;
     public final Button btnCharger;
-    public final Button btnSupprimer;
+    public Button btnSupprimer;
     public final ToggleButton btnTheme;
     public final ToggleButton btnMute;
     public final ImageView imagePokemon;
@@ -29,6 +30,19 @@ public class PokemonViewFX {
         // Liste des Pokemon (gauche)
         listePokemon = new ListView<>();
         listePokemon.setPrefWidth(280);
+
+        listePokemon.setCellFactory(lv-> new ListCell<Pokemon>() {
+                    @Override
+                    protected void updateItem(Pokemon pokemon, boolean vide) {
+                        super.updateItem(pokemon, vide);
+                        if (vide || pokemon == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(pokemon.nom + " " + pokemon.type1 + " " + pokemon.attaque + "/100");
+                        }
+                    }
+                });
 
         // Details (centre-droite)
         details = new TextArea();
