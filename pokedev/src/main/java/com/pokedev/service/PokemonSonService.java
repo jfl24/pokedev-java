@@ -4,7 +4,8 @@ import com.pokedev.modele.Pokemon;
 import javafx.scene.media.AudioClip;
 import java.net.URL;
 
-public class PokemonSonService {
+public class
+PokemonSonService {
 
     public void jouerCri(Pokemon pokemon) throws Exception {
         URL url = getClass().getClassLoader().getResource("cries/" + pokemon.id + ".mp3");
