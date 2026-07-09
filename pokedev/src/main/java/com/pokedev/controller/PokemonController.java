@@ -5,15 +5,19 @@ import com.pokedev.modele.PokemonDAO;
 import com.pokedev.service.PokemonApiService;
 import com.pokedev.util.Connexion;
 import com.pokedev.view.PokemonViewFX;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+
+
 import java.util.Optional;
 import com.pokedev.service.PokemonSonService;
 
 import java.sql.SQLException;
+
 
 public class PokemonController {
 

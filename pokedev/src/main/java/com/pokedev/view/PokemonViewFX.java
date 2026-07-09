@@ -20,7 +20,6 @@ public class PokemonViewFX {
     public final Button btnCharger;
     public Button btnSupprimer;
     public final ToggleButton btnTheme;
-    public final ToggleButton btnMute;
     public final ImageView imagePokemon;
     public final Label messageErreur;
 
@@ -72,11 +71,10 @@ public class PokemonViewFX {
         btnSupprimer = new Button("Supprimer");
         btnSupprimer.setDisable(true);
         btnTheme = new ToggleButton("Nuit");
-        btnMute = new ToggleButton("Son");
 
         messageErreur = new Label();
 
-        HBox formulaire = new HBox(10, champNomId, btnCharger, btnSupprimer, btnTheme, btnMute);
+        HBox formulaire = new HBox(10, champNomId, btnCharger, btnSupprimer, btnTheme);
         VBox bas = new VBox(6, formulaire, messageErreur);
 
         // Zone details : BorderPane imbrique
