@@ -2,25 +2,24 @@
     -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
     -fx-background-color: #f7f8fb;
 }
-.carte-film {
+.carte-pokemon {
         -fx-background-color: white;
         -fx-border-color: #d3d8e0;
         -fx-border-width: 1;
         -fx-border-radius: 6;
         -fx-background-radius: 6;
         -fx-padding: 12;
-}
-        /* TextArea des details : override des 3 couches internes */
-.carte-film .text-area {
+}  /* TextArea des details : override des 3 couches internes */
+.carte-pokemon .text-area {
     -fx-control-inner-background: transparent;
     -fx-text-fill: #1e222e;
 }
-.carte-film .text-area .content {
+.carte-pokemon .text-area .content {
     -fx-background-color: transparent;
 
 }
 
-.carte-film .text-area .text {
+.carte-pokemon .text-area .text {
     -fx-fill: #1e222e;
 }
 
@@ -85,34 +84,33 @@
     -fx-background-color: #1e222e;
 }
 
-.dark-theme .carte-film {
+.dark-theme .carte-pokemon {
     -fx-background-color: #2a2f3d;
     -fx-border-color: #3d4453;
 }
 
-.dark-theme .carte-film .text-area {
+.dark-theme .carte-pokemon .text-area {
     -fx-control-inner-background: #2a2f3d;
     -fx-text-fill: #e6e8ee;
     -fx-highlight-fill: #4a90e2;
     -fx-highlight-text-fill: white;
 }
 
-.dark-theme .carte-film .text-area .content {
+.dark-theme .carte-pokemon .text-area .content {
     -fx-background-color: transparent;
 }
 
-.dark-theme .carte-film .text-area .text {
+.dark-theme .carte-pokemon .text-area .text {
     -fx-fill: #e6e8ee;
 }
 
-. dark-theme .list-view {
+.dark-theme .list-view {
     -fx-background-color: #2a2f3d;
     -fx-border-color: #3d4453;
     -fx-control-inner-background: #2a2f3d;
-
 }
 
-. dark-theme .list-cell {
+.dark-theme .list-cell {
     -fx-background-color: #2a2f3d;
     -fx-text-fill: #e6e8ee;
 }
@@ -127,9 +125,13 @@
 }
 
 .dark-theme .text-field {
-        -fx-background-color: #2a2f3d;
-        -fx-border-color: #3d4453;
-        -fx-text-fill: #e6e8ee;
+    -fx-background-color: #2a2f3d;
+    -fx-border-color: #3d4453;
+    -fx-text-fill: #e6e8ee;
+}
+
+.dark-theme .text-area {
+    -fx-text-fill: black;
 }
 
 .dark-theme .text-field:focused {
@@ -137,8 +139,8 @@
 }
 
 .dark-theme .button, .dark-theme .toggle-button {
-            -fx-background-color: #3d4453;
-            -fx-text-fill: #e6e8ee;
+    -fx-background-color: #3d4453;
+    -fx-text-fill: #e6e8ee;
 }
 
 .dark-theme .button:hover, .dark-theme .toggle-button:hover {

@@ -25,6 +25,24 @@ public class PokemonController {
         view.btnCharger.setOnAction(e -> chargerDepuisApi());
 
         view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> afficherDetails(nouveau));
+
+        view.btnSupprimer.setOnAction(e -> supprimerSelection());
+
+        view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> {
+            view.btnSupprimer.setDisable(nouveau == null);
+            afficherDetails(nouveau);
+        });
+
+        view.btnTheme.setOnAction(e -> {
+            javafx.scene.Parent racine = view.getRoot();
+            if (view.btnTheme.isSelected()) {
+                racine.getStyleClass().add("dark-theme");
+                view.btnTheme.setText("Jour");
+            } else {
+                racine.getStyleClass().remove("dark-theme");
+                view.btnTheme.setText("Nuit");
+            }
+        });
     }
 
     public void afficherDetails(Pokemon p) {
@@ -63,25 +81,6 @@ public class PokemonController {
         }
     }
 
-    public void supprimerPokemon() {
-        view.btnSupprimer.setOnAction(e -> supprimerSelection());
-
-        view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> {
-            view.btnSupprimer.setDisable(nouveau == null);
-            afficherDetails(nouveau);
-        });
-    }
-
-    public void changerTheme() {
-        javafx.scene.Parent racine = view.getRoot();
-        if (view.btnTheme.isSelected()) {
-            racine.getStyleClass().add("dark-theme");
-            view.btnTheme.setText("Jour");
-        } else {
-            racine.getStyleClass().remove("dark-theme");
-            view.btnTheme.setText("Nuit");
-        }
-    }
 
     private void supprimerSelection() {
         Pokemon selection = view.listePokemon.getSelectionModel().getSelectedItem();

@@ -39,7 +39,7 @@ public class PokemonViewFX {
                             setText(null);
                             setGraphic(null);
                         } else {
-                            setText(pokemon.nom + " " + pokemon.type1 + " " + pokemon.attaque + "/100");
+                            setText(pokemon.nom.toUpperCase() + " ( " + pokemon.type1.name().toLowerCase() + " ) -  Niveau d'attaque : " + pokemon.attaque);
                         }
                     }
                 });
@@ -53,6 +53,15 @@ public class PokemonViewFX {
         // Image (centre-gauche)
         imagePokemon = new ImageView();
         imagePokemon.setPreserveRatio(true);
+        imagePokemon.setFitWidth(200);
+        imagePokemon.setFitHeight(200);
+
+        // On crée un conteneur pour l'image
+        VBox conteneurImage = new VBox(imagePokemon);
+        conteneurImage.setMinWidth(220);
+        conteneurImage.setPrefWidth(220);
+        conteneurImage.setMaxWidth(220);
+        conteneurImage.setAlignment(javafx.geometry.Pos.CENTER);   // On détermine une taille et on place la photo au centre
 
         // Formulaire bas
         champNomId = new TextField();
@@ -72,10 +81,10 @@ public class PokemonViewFX {
 
         // Zone details : BorderPane imbrique
         BorderPane zoneDetails = new BorderPane();
-        zoneDetails.setLeft(imagePokemon);
+        zoneDetails.setLeft(conteneurImage);
         zoneDetails.setCenter(details);
         BorderPane.setMargin(details, new Insets(0, 0, 0, 15));
-        zoneDetails.getStyleClass().add("carte-film");
+        zoneDetails.getStyleClass().add("carte-pokemon");
 
         // BorderPane racine
         racine = new BorderPane();
@@ -85,9 +94,6 @@ public class PokemonViewFX {
         racine.setPadding(new Insets(15));
         BorderPane.setMargin(zoneDetails, new Insets(0, 0, 0, 15));
         BorderPane.setMargin(bas, new Insets(15, 0, 0, 0));
-
-        // Image responsive
-        imagePokemon.fitWidthProperty().bind(Bindings.max(140, Bindings.min(320, racine.widthProperty().multiply(0.25))));
 
     }
         public Parent getRoot() {
