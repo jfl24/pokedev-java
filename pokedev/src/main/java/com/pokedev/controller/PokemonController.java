@@ -62,6 +62,8 @@ public class PokemonController {
             view.imagePokemon.setImage(img);
         }
     }
+
+
     public void chargerDepuisApi() {
         String recherche = view.champNomId.getText();
         try{

@@ -23,6 +23,79 @@
     -fx-fill: #1e222e;
 }
 
+.acier {
+    -fx-background-color: #B7B7CE;
+}
+
+.combat {
+    -fx-background-color: #C22E28;
+}
+
+.dragon {
+    -fx-background-color: #6F35FC;
+}
+
+.eau {
+    -fx-background-color: #6390F0;
+}
+
+.electrik {
+    -fx-background-color: #F7D02C;
+}
+
+.fee {
+    -fx-background-color: #D685AD;
+}
+
+.feu {
+    -fx-background-color: #EE8130;
+}
+
+.glace {
+    -fx-background-color: #96D9D6;
+}
+
+.insecte {
+    -fx-background-color: #A6B91A;
+}
+
+.normal {
+    -fx-background-color: #A8A77A;
+}
+
+.plante {
+    -fx-background-color: #7AC74C;
+}
+
+.poison {
+    -fx-background-color: #A33EA1;
+}
+
+.psy {
+    -fx-background-color: #F95587;
+}
+
+.roche {
+    -fx-background-color: #B6A136;
+}
+
+.sol {
+    -fx-background-color: #E2BF65;
+}
+
+.spectre {
+    -fx-background-color: #735797;
+}
+
+.tenebres {
+    -fx-background-color: #705746;
+}
+
+.vol {
+    -fx-background-color: #A98FF3;
+}
+
+
 .list-view {
     -fx-background-color: white;
     -fx-border-color: #d3d8e0;
