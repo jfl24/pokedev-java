@@ -57,10 +57,10 @@ public class PokemonViewFX {
         imagePokemon.setFitHeight(200);
 
         // On crée un conteneur pour l'image
-        VBox conteneurImage = new VBox(imagePokemon);
-        conteneurImage.setMinWidth(220);
-        conteneurImage.setPrefWidth(220);
-        conteneurImage.setMaxWidth(220);
+        HBox conteneurImage = new HBox(imagePokemon);
+        conteneurImage.setMinHeight(220);
+        conteneurImage.setPrefHeight(220);
+        conteneurImage.setMaxHeight(220);
         conteneurImage.setAlignment(javafx.geometry.Pos.CENTER);   // On détermine une taille et on place la photo au centre
 
         // Formulaire bas
@@ -81,8 +81,8 @@ public class PokemonViewFX {
 
         // Zone details : BorderPane imbrique
         BorderPane zoneDetails = new BorderPane();
-        zoneDetails.setLeft(conteneurImage);
-        zoneDetails.setCenter(details);
+        zoneDetails.setBottom(conteneurImage);
+        zoneDetails.setTop(details);
         BorderPane.setMargin(details, new Insets(0, 0, 0, 15));
         zoneDetails.getStyleClass().add("carte-pokemon");
 
