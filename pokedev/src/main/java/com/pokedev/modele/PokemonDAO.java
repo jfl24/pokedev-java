@@ -21,7 +21,7 @@ public class PokemonDAO {
                     defense = EXCLUDED.defense,
                     attaque_speciale = EXCLUDED.attaque_speciale,
                     defense_speciale = EXCLUDED.defense_speciale,
-                    vitesse = EXCLUDED.vitesse
+                    vitesse = EXCLUDED.vitesse;
                 """;
 
         try (Connection connexion = Connexion.getConnexion();

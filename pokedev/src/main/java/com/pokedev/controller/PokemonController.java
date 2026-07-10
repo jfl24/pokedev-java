@@ -5,15 +5,19 @@ import com.pokedev.modele.PokemonDAO;
 import com.pokedev.service.PokemonApiService;
 import com.pokedev.util.Connexion;
 import com.pokedev.view.PokemonViewFX;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+
+
 import java.util.Optional;
 import com.pokedev.service.PokemonSonService;
 
 import java.sql.SQLException;
+
 
 public class PokemonController {
 
@@ -37,9 +41,9 @@ public class PokemonController {
             if (nouveau != null) {
                 afficherDetails(nouveau);
                 // Un écouteur d'événements pour changer la couleur de la zone à droite selon le type du Pokémon cliqué
-                view.racine.getStyleClass().setAll("carte-pokemon", nouveau.type1.name().toLowerCase());
+                view.racine.getStyleClass().setAll("root", nouveau.type1.name().toLowerCase());
             } else {
-                view.racine.getStyleClass().setAll("carte-pokemon");
+                view.racine.getStyleClass().setAll("root");
             }
         });
 
@@ -57,15 +61,22 @@ public class PokemonController {
 
     public void afficherDetails(Pokemon p) {
         if (p == null) {
-            view.details.clear();
+            view.details.setText("");
             view.imagePokemon.setImage(null);
             return;
         }
         String text =
-                "=== " + p.nom + " ( " + p.type1 + " ) ===\n\n" +
-                        "Attaque : " + p.attaque + "\n" +
-                        "Défense : " + p.defense;
+                "=== " + p.nom.toUpperCase() + " ( " + p.type1.toString().toLowerCase() + " ) ===\n\n";
         view.details.setText(text);
+        view.barres.setVisible(true);
+        view.barres.setManaged(true);
+
+        view.barreHp.setWidth(p.hp / 255.0 * 100.0 * 2.0);
+        view.barreAttaque.setWidth(p.attaque / 255.0 * 100.0 * 2.0);
+        view.barreDefense.setWidth(p.defense / 255.0 * 100.0 * 2.0);
+        view.barreAttSpeciale.setWidth(p.attaqueSpeciale / 255.0 * 100.0 * 2.0);
+        view.barreDefSpeciale.setWidth(p.defenseSpeciale / 255.0 * 100.0 * 2.0);
+        view.barreVitesse.setWidth(p.vitesse / 255.0 * 100.0 * 2.0);
 
         if (p.imageUrl != null) {
             Image img = new Image(p.imageUrl, true);
@@ -89,6 +100,8 @@ public class PokemonController {
     public void rafraichirListe(){
         try{
             view.listePokemon.getItems().setAll(dao.lister());
+            view.barres.setVisible(false);
+            view.barres.setManaged(false);
         } catch (Exception e) {
             view.messageErreur.setText("Erreur dans la BDD : "+ e.getMessage());
         }
@@ -108,8 +121,10 @@ public class PokemonController {
             try {
                 dao.supprimer(selection.id);
                 rafraichirListe();
-                view.details.clear();
+                view.details.setText("");
                 view.imagePokemon.setImage(null);
+                view.barres.setVisible(false);
+                view.barres.setManaged(false);  // Pour libérer l'espace prise par les barres
             } catch (Exception ex) {
                 view.messageErreur.setText("Erreur : " + ex.getMessage());
             }
