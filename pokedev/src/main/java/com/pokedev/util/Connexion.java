@@ -8,7 +8,7 @@ public class Connexion {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/pokedev";
     private static final String USER = "postgres";
-    private static final String PASS = "root";
+    private static final String PASS = "Uk5%6gs4Vp";
 
     private Connexion() {
     }

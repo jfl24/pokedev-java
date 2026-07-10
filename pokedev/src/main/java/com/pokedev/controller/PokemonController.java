@@ -78,6 +78,8 @@ public class PokemonController {
         view.barreDefSpeciale.setWidth(p.defenseSpeciale / 255.0 * 100.0 * 2.0);
         view.barreVitesse.setWidth(p.vitesse / 255.0 * 100.0 * 2.0);
 
+        view.messageErreur.setText("");
+
         if (p.imageUrl != null) {
             Image img = new Image(p.imageUrl, true);
             view.imagePokemon.setImage(img);
@@ -91,7 +93,7 @@ public class PokemonController {
             Pokemon p = service.recuperer(recherche);
             dao.sauvegarder(p);
             rafraichirListe();
-            view.messageErreur.setText("");  // Pour faire disparaître le message d'erreur quand la recherche fonctionne
+            view.messageErreur.setText("  ");  // Pour faire disparaître le message d'erreur quand la recherche fonctionne
         } catch (Exception e) {
             view.messageErreur.setText("Pokemon introuvable ou API en erreur : "+ e.getMessage());
         }
@@ -100,6 +102,7 @@ public class PokemonController {
     public void rafraichirListe(){
         try{
             view.listePokemon.getItems().setAll(dao.lister());
+            compterNombre();
             view.barres.setVisible(false);
             view.barres.setManaged(false);
         } catch (Exception e) {
@@ -146,7 +149,19 @@ public class PokemonController {
         view.btnMute.setSelected(false);
     }
 
-    public void demarrer() { rafraichirListe(); }
+    public void compterNombre (){
+        try {
+            long nombrePokemon = dao.compter();
+            view.nombrePokemon.setText("Total capturés : "+ nombrePokemon);
+        } catch (SQLException e) {
+            view.messageErreur.setText("Erreur pour obtenir le nombre de Pokémon capturés.");
+        }
+    }
+
+    public void demarrer() {
+        rafraichirListe();
+        compterNombre();
+    }
 
     public void arreter() {
         System.out.println("Application arrêtée avec succès.");
