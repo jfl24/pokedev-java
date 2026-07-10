@@ -22,77 +22,78 @@
 
 .carte-pokemon .text-area .text {
     -fx-fill: #1e222e;
+    -fx-font-size: 22px;
 }
 
-.acier {
+.root.acier {
     -fx-background-color: #B7B7CE;
 }
 
-.combat {
+.root.combat {
     -fx-background-color: #C22E28;
 }
 
-.dragon {
+.root.dragon {
     -fx-background-color: #6F35FC;
 }
 
-.eau {
+.root.eau {
     -fx-background-color: #6390F0;
 }
 
-.electrik {
+.root.electrik {
     -fx-background-color: #F7D02C;
 }
 
-.fee {
+.root.fee {
     -fx-background-color: #D685AD;
 }
 
-.feu {
+.root.feu {
     -fx-background-color: #EE8130;
 }
 
-.glace {
+.root.glace {
     -fx-background-color: #96D9D6;
 }
 
-.insecte {
+.root.insecte {
     -fx-background-color: #A6B91A;
 }
 
-.normal {
+.root.normal {
     -fx-background-color: #A8A77A;
 }
 
-.plante {
+.root.plante {
     -fx-background-color: #7AC74C;
 }
 
-.poison {
+.root.poison {
     -fx-background-color: #A33EA1;
 }
 
-.psy {
+.root.psy {
     -fx-background-color: #F95587;
 }
 
-.roche {
+.root.roche {
     -fx-background-color: #B6A136;
 }
 
-.sol {
+.root.sol {
     -fx-background-color: #E2BF65;
 }
 
-.spectre {
+.root.spectre {
     -fx-background-color: #735797;
 }
 
-.tenebres {
+.root.tenebres {
     -fx-background-color: #705746;
 }
 
-.vol {
+.root.vol {
     -fx-background-color: #A98FF3;
 }
 
