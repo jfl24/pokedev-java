@@ -89,4 +89,16 @@ public class PokemonDAO {
             }
         }
     }
+
+    public long compter() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM pokemons";
+        try (Connection connexion = Connexion.getConnexion();
+             PreparedStatement ps = connexion.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+        }
+        return 0;
+    }
 }
