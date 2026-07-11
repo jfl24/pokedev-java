@@ -38,6 +38,7 @@ public class PokemonController {
             view.btnSupprimer.setDisable(nouveau == null);
             if (nouveau != null) {
                 afficherDetails(nouveau);
+                // Un écouteur d'événements pour changer la couleur de la racine selon le type du Pokémon cliqué
                 view.racine.getStyleClass().setAll("root", nouveau.type1.name().toLowerCase());
             } else {
                 view.racine.getStyleClass().setAll("root");
