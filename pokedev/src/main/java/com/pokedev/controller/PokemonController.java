@@ -173,10 +173,10 @@ public class PokemonController {
         view.btnMute.setSelected(false);
     }
 
-    public void compterNombre (){
+    public void compterNombre() {
         try {
-            long nombrePokemon = dao.compter();
-            view.nombrePokemon.setText("Total capturés : "+ nombrePokemon);
+            long totalPokemon = dao.compter();
+            view.nombrePokemon.setText(String.valueOf(totalPokemon));
         } catch (SQLException e) {
             view.messageErreur.setText("Erreur pour obtenir le nombre de Pokémon capturés.");
         }
@@ -184,7 +184,6 @@ public class PokemonController {
 
     public void demarrer() {
         rafraichirListe();
-        compterNombre();
     }
 
     public void arreter() {
