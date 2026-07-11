@@ -30,8 +30,6 @@ public class PokemonController {
         this.view = view;
         view.btnCharger.setOnAction(e -> chargerDepuisApi());
 
-        view.listePokemon.getSelectionModel().selectedItemProperty().addListener((obs, ancien, nouveau) -> afficherDetails(nouveau));
-
         view.btnSupprimer.setOnAction(e -> supprimerSelection());
 
         view.btnMute.setOnAction(e -> jouerCriSelection());
@@ -40,10 +38,12 @@ public class PokemonController {
             view.btnSupprimer.setDisable(nouveau == null);
             if (nouveau != null) {
                 afficherDetails(nouveau);
-                // Un écouteur d'événements pour changer la couleur de la zone à droite selon le type du Pokémon cliqué
                 view.racine.getStyleClass().setAll("root", nouveau.type1.name().toLowerCase());
             } else {
                 view.racine.getStyleClass().setAll("root");
+            }
+            if (view.btnTheme.isSelected()) {
+                view.racine.getStyleClass().add("dark-theme");
             }
         });
 
@@ -61,23 +61,42 @@ public class PokemonController {
 
     public void afficherDetails(Pokemon p) {
         if (p == null) {
-            view.details.setText("");
+            view.titrePokemon.setText("");
+            view.titrePokemon.setVisible(false);
+            view.titrePokemon.setManaged(false);
             view.imagePokemon.setImage(null);
             return;
         }
-        String text =
-                "=== " + p.nom.toUpperCase() + " ( " + p.type1.toString().toLowerCase() + " ) ===\n\n";
-        view.details.setText(text);
+        view.titrePokemon.setText(p.nom.toUpperCase());
+        view.titrePokemon.setVisible(true);
+        view.titrePokemon.setManaged(true);
+        view.typeWrapper.setVisible(true);
+        view.typeWrapper.setManaged(true);
+        view.type1Label.setText(p.type1.name().toLowerCase());
+        view.type1Label.getStyleClass().setAll("type-badge", "type-badge-detail", p.type1.name().toLowerCase());
+        if (p.type2 != null) {
+            view.type2Label.setText(p.type2.name().toLowerCase());
+            view.type2Label.getStyleClass().setAll("type-badge", "type-badge-detail", p.type2.name().toLowerCase());
+            view.type2Label.setVisible(true);
+            view.type2Label.setManaged(true);
+        } else {
+            view.type2Label.setVisible(false);
+            view.type2Label.setManaged(false);
+        }
         view.barres.setVisible(true);
         view.barres.setManaged(true);
-
-        view.barreHp.setWidth(p.hp / 255.0 * 100.0 * 2.0);
-        view.barreAttaque.setWidth(p.attaque / 255.0 * 100.0 * 2.0);
-        view.barreDefense.setWidth(p.defense / 255.0 * 100.0 * 2.0);
-        view.barreAttSpeciale.setWidth(p.attaqueSpeciale / 255.0 * 100.0 * 2.0);
-        view.barreDefSpeciale.setWidth(p.defenseSpeciale / 255.0 * 100.0 * 2.0);
-        view.barreVitesse.setWidth(p.vitesse / 255.0 * 100.0 * 2.0);
-
+        view.barreHp.setProgress(p.hp / 255.0);
+        view.barreAttaque.setProgress(p.attaque / 255.0);
+        view.barreDefense.setProgress(p.defense / 255.0);
+        view.barreAttSpeciale.setProgress(p.attaqueSpeciale / 255.0);
+        view.barreDefSpeciale.setProgress(p.defenseSpeciale / 255.0);
+        view.barreVitesse.setProgress(p.vitesse / 255.0);
+        view.valeurHp.setText(p.hp + "/255");
+        view.valeurAttaque.setText(p.attaque + "/255");
+        view.valeurDefense.setText(p.defense + "/255");
+        view.valeurAttSpeciale.setText(p.attaqueSpeciale + "/255");
+        view.valeurDefSpeciale.setText(p.defenseSpeciale + "/255");
+        view.valeurVitesse.setText(p.vitesse + "/255");
         if (p.imageUrl != null) {
             Image img = new Image(p.imageUrl, true);
             view.imagePokemon.setImage(img);

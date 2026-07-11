@@ -22,81 +22,122 @@
 
 .carte-pokemon .text-area .text {
     -fx-fill: #1e222e;
-    -fx-font-size: 22px;
+    -fx-font-family: "Segoe UI Black", "Arial Black", "Segoe UI", sans-serif;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
 }
 
-.root.acier {
+.pokemon-title {
+    -fx-font-family: "Segoe UI Black", "Arial Black", "Segoe UI", sans-serif;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e222e;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 2, 0.3, 1, 1);
+}
+
+
+.type-badge {
+    -fx-padding: 3 8;
+    -fx-background-radius: 20;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.type-badge-detail {
+    -fx-padding: 6 16;
+    -fx-font-size: 15px;
+}
+
+.root.acier,
+.type-badge.acier {
     -fx-background-color: #B7B7CE;
 }
 
-.root.combat {
+.root.combat,
+.type-badge.combat {
     -fx-background-color: #C22E28;
 }
 
-.root.dragon {
+.root.dragon,
+.type-badge.dragon {
     -fx-background-color: #6F35FC;
 }
 
-.root.eau {
+.root.eau,
+.type-badge.eau {
     -fx-background-color: #6390F0;
 }
 
-.root.electrik {
+.root.electrik,
+.type-badge.electrik {
     -fx-background-color: #F7D02C;
 }
 
-.root.fee {
+.root.fee,
+.type-badge.fee {
     -fx-background-color: #D685AD;
 }
 
-.root.feu {
+.root.feu,
+.type-badge.feu {
     -fx-background-color: #EE8130;
 }
 
-.root.glace {
+.root.glace,
+.type-badge.glace {
     -fx-background-color: #96D9D6;
 }
 
-.root.insecte {
+.root.insecte,
+.type-badge.insecte {
     -fx-background-color: #A6B91A;
 }
 
-.root.normal {
+.root.normal,
+.type-badge.normal {
     -fx-background-color: #A8A77A;
 }
 
-.root.plante {
+.root.plante,
+.type-badge.plante {
     -fx-background-color: #7AC74C;
 }
 
-.root.poison {
+.root.poison,
+.type-badge.poison {
     -fx-background-color: #A33EA1;
 }
 
-.root.psy {
+.root.psy,
+.type-badge.psy {
     -fx-background-color: #F95587;
 }
 
-.root.roche {
+.root.roche,
+.type-badge.roche {
     -fx-background-color: #B6A136;
 }
 
-.root.sol {
+.root.sol,
+.type-badge.sol {
     -fx-background-color: #E2BF65;
 }
 
-.root.spectre {
+.root.spectre,
+.type-badge.spectre {
     -fx-background-color: #735797;
 }
 
-.root.tenebres {
+.root.tenebres,
+.type-badge.tenebres {
     -fx-background-color: #705746;
 }
 
-.root.vol {
+.root.vol,
+.type-badge.vol {
     -fx-background-color: #A98FF3;
 }
-
 
 .list-view {
     -fx-background-color: white;
@@ -232,7 +273,69 @@
 }
 
 
+/* BARRES DE STATS */
 
+.stat-bar {
+    -fx-pref-height: 22;
+    -fx-min-height: 22;
+    -fx-max-height: 22;
+}
+
+.stat-bar > .track {
+    -fx-background-color: #d9dee8;
+    -fx-background-radius: 10;
+}
+
+.stat-bar > .bar {
+    -fx-background-radius: 10;
+}
+
+.stat-bar.hp {
+    -fx-accent: #2ed573;
+}
+
+.stat-bar.attaque {
+    -fx-accent: #ff2c2c;
+}
+
+.stat-bar.defense {
+    -fx-accent: #2c75ff;
+}
+
+.stat-bar.att-speciale {
+    -fx-accent: #ffd700;
+}
+
+.stat-bar.def-speciale {
+    -fx-accent: #e0b0ff;
+}
+
+.stat-bar.vitesse {
+    -fx-accent: #ff6d2d;
+}
+
+.stat-value {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e222e;
+}
+
+
+/* DARK MODE POUR LES STATS */
+.dark-theme .stat-bar > .track {
+    -fx-background-color: #3d4453;
+}
+
+.dark-theme .stat-value {
+    -fx-text-fill: white;
+}
+
+.dark-theme .type-badge {
+    -fx-text-fill: white;
+}
+
+.dark-theme .pokemon-title {
+    -fx-text-fill: #e6e8ee;
+}
 
 
 
