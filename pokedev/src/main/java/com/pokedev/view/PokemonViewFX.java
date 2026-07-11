@@ -20,6 +20,7 @@ public class PokemonViewFX {
     public ListView<Pokemon> listePokemon;
     public final Label details;
     public final TextField champNomId;
+    public final Label nombrePokemon;
     public final Button btnCharger;
     public Button btnSupprimer;
     public final ToggleButton btnTheme;
@@ -223,6 +224,8 @@ public class PokemonViewFX {
         champNomId.setPromptText("Nom ou ID d'un Pokémon a charger");
         HBox.setHgrow(champNomId, Priority.ALWAYS);
 
+
+
         btnCharger = new Button("Charger");
         btnSupprimer = new Button("Supprimer");
         btnSupprimer.setDisable(true);
@@ -232,7 +235,13 @@ public class PokemonViewFX {
         messageErreur = new Label();
 
         HBox formulaire = new HBox(10, champNomId, btnCharger, btnSupprimer, btnTheme, btnMute);
-        VBox bas = new VBox(6, formulaire, messageErreur);
+
+        // Le label pour afficher le nombre de Pokémon
+        nombrePokemon = new Label("  ");
+        VBox bas = new VBox(6, formulaire, nombrePokemon, messageErreur);
+        bas.setMinHeight(70);
+        bas.setPrefHeight(70);
+        bas.setMaxHeight(70);
 
         // Zone details : BorderPane imbrique
         VBox zoneDetails = new VBox(15);
@@ -241,6 +250,8 @@ public class PokemonViewFX {
         zoneDetails.setSpacing(18);
         zoneDetails.getChildren().addAll(titrePokemon, typeWrapper, barres, conteneurImage);
         zoneDetails.getStyleClass().add("carte-pokemon");
+        zoneDetails.setMinHeight(430);
+        zoneDetails.setPrefHeight(430);
 
         // BorderPane racine
         racine = new BorderPane();
