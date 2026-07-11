@@ -15,12 +15,12 @@ public class MainFx extends Application {
         ctrl = new PokemonController(view);
         ctrl.demarrer();
 
-        Scene scene = new Scene(view.getRoot(), 1000, 650);
+        Scene scene = new Scene(view.getRoot(), 1000, 750);
         scene.getStylesheets().add(Thread.currentThread().getContextClassLoader().getResource("styles/style.css").toExternalForm());
         stage.setTitle("Pokedex -- Mes Pokemon");
         stage.setScene(scene);
         stage.setMinWidth(1000);
-        stage.setMinHeight(650);
+        stage.setMinHeight(750);
         stage.show();
     }
     @Override public void stop() {
