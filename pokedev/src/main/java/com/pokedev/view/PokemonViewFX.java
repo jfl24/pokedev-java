@@ -11,8 +11,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.StackPane;
 
 
 public class PokemonViewFX {
@@ -28,12 +28,22 @@ public class PokemonViewFX {
     public final ImageView imagePokemon;
     public final Label messageErreur;
     public final VBox barres;
-    public Rectangle barreHp;
-    public Rectangle barreAttaque;
-    public Rectangle barreDefense;
-    public Rectangle barreAttSpeciale;
-    public Rectangle barreDefSpeciale;
-    public Rectangle barreVitesse;
+    public Label titrePokemon;
+    public ProgressBar barreHp;
+    public ProgressBar barreAttaque;
+    public ProgressBar barreDefense;
+    public ProgressBar barreAttSpeciale;
+    public ProgressBar barreDefSpeciale;
+    public ProgressBar barreVitesse;
+    public Label valeurHp;
+    public Label valeurAttaque;
+    public Label valeurDefense;
+    public Label valeurAttSpeciale;
+    public Label valeurDefSpeciale;
+    public Label valeurVitesse;
+    public HBox typeWrapper;
+    public Label type1Label;
+    public Label type2Label;
 
     public final BorderPane racine;
 
@@ -42,18 +52,31 @@ public class PokemonViewFX {
         listePokemon = new ListView<>();
         listePokemon.setPrefWidth(320);
 
-        listePokemon.setCellFactory(lv-> new ListCell<Pokemon>() {
-                    @Override
-                    protected void updateItem(Pokemon pokemon, boolean vide) {
-                        super.updateItem(pokemon, vide);
-                        if (vide || pokemon == null) {
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(pokemon.nom.toUpperCase() + " ( " + pokemon.type1.name().toLowerCase() + " ) -  Niveau d'attaque : " + pokemon.attaque);
-                        }
-                    }
-                });
+        listePokemon.setCellFactory(lv -> new ListCell<Pokemon>() {
+            @Override
+            protected void updateItem(Pokemon pokemon, boolean vide) {
+                super.updateItem(pokemon, vide);
+                if (vide || pokemon == null) {
+                    setText(null);
+                    setGraphic(null);
+                    return;
+                }
+                Label nom = new Label("#" + pokemon.id + " " +pokemon.nom.toUpperCase());
+                Label type1 = new Label(pokemon.type1.name().toLowerCase());
+                type1.getStyleClass().addAll("type-badge", pokemon.type1.name().toLowerCase());
+                HBox ligne = new HBox(8);
+                ligne.setAlignment(Pos.CENTER_LEFT);
+                ligne.getChildren().addAll(nom, type1);
+                if (pokemon.type2 != null) {
+                    Label type2 = new Label(pokemon.type2.name().toLowerCase());
+                    type2.getStyleClass().addAll("type-badge", pokemon.type2.name().toLowerCase());
+                    ligne.getChildren().add(type2);
+                }
+
+                setText(null);
+                setGraphic(ligne);
+            }
+        });
 
         // Details (droite-haut)
         details = new Label();
@@ -64,6 +87,26 @@ public class PokemonViewFX {
         details.setMaxHeight(50);
         details.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
+        //Nom du pokemon
+        titrePokemon = new Label();
+        titrePokemon.getStyleClass().add("pokemon-title");
+        titrePokemon.setMaxWidth(Double.MAX_VALUE);
+        titrePokemon.setAlignment(Pos.CENTER);
+        titrePokemon.setVisible(false);
+        titrePokemon.setManaged(false);
+
+        //Wrapper pour les types
+        typeWrapper = new HBox(8);
+        typeWrapper.setAlignment(Pos.CENTER);
+        type1Label = new Label();
+        type2Label = new Label();
+        type1Label.getStyleClass().add("type-badge");
+        type2Label.getStyleClass().add("type-badge");
+        typeWrapper.getChildren().addAll(type1Label, type2Label);
+        typeWrapper.setVisible(false);
+        typeWrapper.setManaged(false);
+
+
         // Image (droite-bas)
         imagePokemon = new ImageView();
         imagePokemon.setPreserveRatio(true);
@@ -71,76 +114,102 @@ public class PokemonViewFX {
         imagePokemon.setFitHeight(200);
 
         // Barres (droite-milieu)
-        this.barreHp = new Rectangle();
-        this.barreAttaque = new Rectangle();
-        this.barreDefense = new Rectangle();
-        this.barreAttSpeciale = new Rectangle();
-        this.barreDefSpeciale = new Rectangle();
-        this.barreVitesse = new Rectangle();
+        this.barreHp = new ProgressBar(0);
+        this.barreAttaque = new ProgressBar(0);
+        this.barreDefense = new ProgressBar(0);
+        this.barreAttSpeciale = new ProgressBar(0);
+        this.barreDefSpeciale = new ProgressBar(0);
+        this.barreVitesse = new ProgressBar(0);
 
+        this.valeurHp = new Label("0/255");
+        this.valeurAttaque = new Label("0/255");
+        this.valeurDefense = new Label("0/255");
+        this.valeurAttSpeciale = new Label("0/255");
+        this.valeurDefSpeciale = new Label("0/255");
+        this.valeurVitesse = new Label("0/255");
 
-        // Les barres avec le texte
-        barreHp.setHeight(15);
-        barreHp.setWidth(0);
-        barreHp.setFill(Color.web("2ed573"));
-        barreAttaque.setHeight(15);
-        barreAttaque.setWidth(0);
-        barreAttaque.setFill(Color.web("ff2c2c"));
-        barreDefense.setHeight(15);
-        barreDefense.setWidth(0);
-        barreDefense.setFill(Color.web("2c75ff"));
-        barreAttSpeciale.setHeight(15);
-        barreAttSpeciale.setWidth(0);
-        barreAttSpeciale.setFill(Color.web("ffd700"));
-        barreDefSpeciale.setHeight(15);
-        barreDefSpeciale.setWidth(0);
-        barreDefSpeciale.setFill(Color.web("e0b0ff"));
-        barreVitesse.setHeight(15);
-        barreVitesse.setWidth(0);
-        barreVitesse.setFill(Color.web("ff6d2d"));
+        barreHp.getStyleClass().addAll("stat-bar", "hp");
+        barreAttaque.getStyleClass().addAll("stat-bar", "attaque");
+        barreDefense.getStyleClass().addAll("stat-bar", "defense");
+        barreAttSpeciale.getStyleClass().addAll("stat-bar", "att-speciale");
+        barreDefSpeciale.getStyleClass().addAll("stat-bar", "def-speciale");
+        barreVitesse.getStyleClass().addAll("stat-bar", "vitesse");
 
-        // Zone qui contient les barres d'attibuts
-        this.barres = new VBox(10);
-        this.barres.setVisible(false);
-        this.barres.setManaged(false);
+        valeurHp.getStyleClass().add("stat-value");
+        valeurAttaque.getStyleClass().add("stat-value");
+        valeurDefense.getStyleClass().add("stat-value");
+        valeurAttSpeciale.getStyleClass().add("stat-value");
+        valeurDefSpeciale.getStyleClass().add("stat-value");
+        valeurVitesse.getStyleClass().add("stat-value");
+
+        barreHp.setMaxWidth(Double.MAX_VALUE);
+        barreAttaque.setMaxWidth(Double.MAX_VALUE);
+        barreDefense.setMaxWidth(Double.MAX_VALUE);
+        barreAttSpeciale.setMaxWidth(Double.MAX_VALUE);
+        barreDefSpeciale.setMaxWidth(Double.MAX_VALUE);
+        barreVitesse.setMaxWidth(Double.MAX_VALUE);
+
+        StackPane wrapHp = new StackPane(barreHp, valeurHp);
+        StackPane wrapAttaque = new StackPane(barreAttaque, valeurAttaque);
+        StackPane wrapDefense = new StackPane(barreDefense, valeurDefense);
+        StackPane wrapAttSpeciale = new StackPane(barreAttSpeciale, valeurAttSpeciale);
+        StackPane wrapDefSpeciale = new StackPane(barreDefSpeciale, valeurDefSpeciale);
+        StackPane wrapVitesse = new StackPane(barreVitesse, valeurVitesse);
+
+        wrapHp.setMaxWidth(Double.MAX_VALUE);
+        wrapAttaque.setMaxWidth(Double.MAX_VALUE);
+        wrapDefense.setMaxWidth(Double.MAX_VALUE);
+        wrapAttSpeciale.setMaxWidth(Double.MAX_VALUE);
+        wrapDefSpeciale.setMaxWidth(Double.MAX_VALUE);
+        wrapVitesse.setMaxWidth(Double.MAX_VALUE);
 
         HBox ligneHp = new HBox(10);
         ligneHp.setAlignment(Pos.CENTER_LEFT);
         Label lblHp = new Label("HP : ");
-        lblHp.setPrefWidth(120); // Pour éviter que les barres soient décalées à cause de la longueur du texte différente
-        ligneHp.getChildren().addAll(lblHp, barreHp);
+        lblHp.setPrefWidth(120);
+        HBox.setHgrow(wrapHp, Priority.ALWAYS);
+        ligneHp.getChildren().addAll(lblHp, wrapHp);
 
         HBox ligneAttaque = new HBox(10);
         ligneAttaque.setAlignment(Pos.CENTER_LEFT);
         Label lblAtt = new Label("ATTAQUE : ");
         lblAtt.setPrefWidth(120);
-        ligneAttaque.getChildren().addAll(lblAtt, barreAttaque);
+        HBox.setHgrow(wrapAttaque, Priority.ALWAYS);
+        ligneAttaque.getChildren().addAll(lblAtt, wrapAttaque);
 
         HBox ligneDefense = new HBox(10);
         ligneDefense.setAlignment(Pos.CENTER_LEFT);
         Label lblDef = new Label("DEFENSE : ");
         lblDef.setPrefWidth(120);
-        ligneDefense.getChildren().addAll(lblDef, barreDefense);
+        HBox.setHgrow(wrapDefense, Priority.ALWAYS);
+        ligneDefense.getChildren().addAll(lblDef, wrapDefense);
 
         HBox ligneAttSpec = new HBox(10);
         ligneAttSpec.setAlignment(Pos.CENTER_LEFT);
         Label lblAttSpec = new Label("ATTAQUE SPECIALE : ");
         lblAttSpec.setPrefWidth(120);
-        ligneAttSpec.getChildren().addAll(lblAttSpec, barreAttSpeciale);
+        HBox.setHgrow(wrapAttSpeciale, Priority.ALWAYS);
+        ligneAttSpec.getChildren().addAll(lblAttSpec, wrapAttSpeciale);
 
         HBox ligneDefSpec = new HBox(10);
         ligneDefSpec.setAlignment(Pos.CENTER_LEFT);
         Label lblDefSpec = new Label("DEFENSE SPECIALE : ");
         lblDefSpec.setPrefWidth(120);
-        ligneDefSpec.getChildren().addAll(lblDefSpec, barreDefSpeciale);
+        HBox.setHgrow(wrapDefSpeciale, Priority.ALWAYS);
+        ligneDefSpec.getChildren().addAll(lblDefSpec, wrapDefSpeciale);
 
         HBox ligneVitesse = new HBox(10);
         ligneVitesse.setAlignment(Pos.CENTER_LEFT);
         Label lblVitesse = new Label("VITESSE : ");
         lblVitesse.setPrefWidth(120);
-        ligneVitesse.getChildren().addAll(lblVitesse, barreVitesse);
+        HBox.setHgrow(wrapVitesse, Priority.ALWAYS);
+        ligneVitesse.getChildren().addAll(lblVitesse, wrapVitesse);
 
-        // On récupère toutes les lignes dans le conteneur
+        this.barres = new VBox(10);
+        this.barres.setVisible(false);
+        this.barres.setManaged(false);
+        this.barres.setMaxWidth(420);
+
         barres.getChildren().addAll(ligneHp, ligneAttaque, ligneDefense, ligneAttSpec, ligneDefSpec, ligneVitesse);
 
         // On crée un conteneur pour l'image
@@ -178,7 +247,8 @@ public class PokemonViewFX {
         VBox zoneDetails = new VBox(15);
         zoneDetails.setAlignment(javafx.geometry.Pos.CENTER);
         zoneDetails.setPadding(new Insets(20));
-        zoneDetails.getChildren().addAll(details, barres, conteneurImage);
+        zoneDetails.setSpacing(18);
+        zoneDetails.getChildren().addAll(titrePokemon, typeWrapper, barres, conteneurImage);
         zoneDetails.getStyleClass().add("carte-pokemon");
         zoneDetails.setMinHeight(430);
         zoneDetails.setPrefHeight(430);
