@@ -146,6 +146,11 @@ public class PokemonController {
                 view.imagePokemon.setImage(null);
                 view.barres.setVisible(false);
                 view.barres.setManaged(false);  // Pour libérer l'espace prise par les barres
+                view.titrePokemon.setText("");
+                view.titrePokemon.setVisible(false);
+                view.titrePokemon.setManaged(false);
+                view.typeWrapper.setVisible(false);
+                view.typeWrapper.setManaged(false);
             } catch (Exception ex) {
                 view.messageErreur.setText("Erreur : " + ex.getMessage());
             }
