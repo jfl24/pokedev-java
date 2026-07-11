@@ -194,6 +194,33 @@
     -fx-border-color: #4a90e2;
 }
 
+/* COMPTEUR DE POKEMON CAPTURES */
+
+.capture-wrapper {
+    -fx-background-color: white;
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 6 16;
+}
+
+.capture-number {
+    -fx-font-family: "Consolas", "Lucida Console", "Courier New";
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a90e2;
+}
+
+.capture-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e222e;
+}
+
+
+
+
 /* THEME SOMBRE (active avec .dark-theme sur racine) */
 
 .dark-theme {
@@ -320,7 +347,7 @@
 }
 
 
-/* DARK MODE POUR LES STATS */
+/* DARK MODE POUR STATS */
 .dark-theme .stat-bar > .track {
     -fx-background-color: #3d4453;
 }
@@ -337,5 +364,15 @@
     -fx-text-fill: #e6e8ee;
 }
 
+.dark-theme .capture-wrapper {
+    -fx-background-color: #2a2f3d;
+    -fx-border-color: #6390f0;
+}
 
+.dark-theme .capture-number {
+    -fx-text-fill: #6390f0;
+}
 
+.dark-theme .capture-title {
+    -fx-text-fill: #e6e8ee;
+}

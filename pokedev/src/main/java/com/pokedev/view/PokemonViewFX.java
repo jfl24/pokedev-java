@@ -237,11 +237,17 @@ public class PokemonViewFX {
         HBox formulaire = new HBox(10, champNomId, btnCharger, btnSupprimer, btnTheme, btnMute);
 
         // Le label pour afficher le nombre de Pokémon
-        nombrePokemon = new Label("  ");
-        VBox bas = new VBox(6, formulaire, nombrePokemon, messageErreur);
-        bas.setMinHeight(70);
-        bas.setPrefHeight(70);
-        bas.setMaxHeight(70);
+        nombrePokemon = new Label("0");
+        nombrePokemon.getStyleClass().add("capture-number");
+        Label texteCaptures = new Label("POKEMON CAPTURES");
+        texteCaptures.getStyleClass().add("capture-title");
+        HBox compteurCaptures = new HBox(8, nombrePokemon, texteCaptures);
+        compteurCaptures.setAlignment(Pos.CENTER_LEFT);
+        compteurCaptures.getStyleClass().add("capture-wrapper");
+        VBox bas = new VBox(8, formulaire, compteurCaptures, messageErreur);
+        bas.setMinHeight(100);
+        bas.setPrefHeight(100);
+        bas.setMaxHeight(100);
 
         // Zone details : BorderPane imbrique
         VBox zoneDetails = new VBox(15);
