@@ -6,6 +6,8 @@
 
 Dans le projet PokéHack, nous avons créé une application en Java qui permet d'afficher et de gérer un Pokédex avec une interface graphique en JavaFx. L'application appelle une API appelée Pokeapi et intègre les données des Pokemon dans une base de données PostgreSQL grâce à JDBC. Ce projet nous a permis d'expérimenter le modèle MVC en divisant le modèle, la vue et le contolleur dans des paquets différents.
 
+![Capture1](screenshots/Capture_d’écran_2026-07-10_213421.png)
+
 ## Comment activer l'application
 
 #### Allez sur IntelliJ IDEA et entrez la commande suivante dans le terminal :
@@ -34,6 +36,8 @@ git clone https://github.com/jfl24/pokedev-java.git
 - PokéAPI
 - Git et GitHub
 - IntelliJ IDEA
+
+![Capture2](screenshots/Capture_d’écran_2026-07-10_213909.png)
 
 ## Fonctionnalités de l'application :
 
