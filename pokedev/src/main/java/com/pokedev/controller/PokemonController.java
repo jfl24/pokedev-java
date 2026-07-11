@@ -102,6 +102,7 @@ public class PokemonController {
             Image img = new Image(p.imageUrl, true);
             view.imagePokemon.setImage(img);
         }
+        view.messageErreur.setText("");
     }
 
 
